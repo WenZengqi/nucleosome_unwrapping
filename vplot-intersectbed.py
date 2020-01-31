@@ -1,16 +1,9 @@
 #!/usr/bin/env python
-#Usage: python vplot-intersectbed.py <fragment-file-name> <peak-file-name> <v-plot-file-name> <fraglength-file-name> <peak-size:m bp> <peak-bin: n bp> <fraglength-size: 0-j bp>
-#   <fragment-file> = <chr,start,end, len>
-#		Typically a file of paired illumina reads
-#		strand is not used
-#	<peak-file> = <chr,start,end,id,strand,...>, only the first 5 fileds were used
-#		peak summit file
-#       strand is used
-#	To plot peak-size/2 upstream and downsteam of peak summits, the peak summits are firstly sloped by peak-size/2 on both direction, then find the 1 bp overlapped  fragments
-#   
-#	Computes distances from midpoints of data_file records to
-#		point_file records for point_file records within
-#		intervals around point_file midpoint +- pk_size
+#Usage: python *.py <fragment-file-name> <peak-file-name> <v-plot-file-name> <fraglength-file-name> <peak-size:m bp> <peak-bin: n bp> <fraglength-size: 0-j bp>
+#<fragment-file> = <chr,start,end, len>, typically a bed file of paired illumina reads, strand is not used
+#<peak-file> = <chr,start,end,id,strand,...>, only the first 5 fileds were used, strand is used
+
+#To analyze fragment length distribution within +/- peak-size/2 of peak summits, the peak summits are firstly sloped by peak-size/2 on both direction, then fragments with 1 bp overlapping with the slopped peaks are picked out by intersectbed. Then the fragment length (i) and the distance (j) from the middle point of a fragment to the middle point of a peak are used to count fragments and stored in a numpy matrix.
 
 from __future__ import print_function
 import re,sys,os,numpy
